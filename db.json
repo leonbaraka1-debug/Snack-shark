@@ -1,0 +1,20 @@
+{
+  "snacks": [
+    {
+      "id": "1",
+      "name": "Crispy Chips",
+      "category": "Kenyan",
+      "type": "Chips",
+      "price": 100,
+      "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b"
+    },
+    {
+      "id": "2",
+      "name": "Chocolate Bar",
+      "category": "American",
+      "type": "Chocolate",
+      "price": 150,
+      "image": "https://images.unsplash.com/photo-1575377427642-087cf684f04d"
+    }
+  ]
+}
