@@ -669,25 +669,26 @@ button {
   gap: 25px;
 }
 
-/* =========================================
-   SNACK CARD IMAGES
-========================================= */
+.snack-card {
+  background: white;
 
-.snack-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
+  padding: 25px;
 
-  border-radius: 14px;
-  margin-bottom: 18px;
+  border-radius: 18px;
 
-  background: #fff0eb;
+  border: 1px solid #f0e5e1;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.07);
+
+  transition: all 0.3s ease;
 }
 
-.snack-card img:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
+.snack-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
 .snack-card h3 {
@@ -712,15 +713,6 @@ button {
   font-weight: bold;
 }
 
-.snack-image {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-  border-radius: 14px;
-  margin-bottom: 18px;
-  background: #fff0eb;
-}
 
 /* =========================================
    ADMIN CONTROLS
@@ -890,155 +882,25 @@ button {
     padding: 25px;
   }
 
-  /* =========================================
-   ADD SNACK SECTION
-========================================= */
+  .add-snack-form {
+    width: 92%;
 
-.admin-form-section {
-  width: 100%;
-  max-width: 950px;
-  margin: 0 auto 70px;
-}
+    padding: 25px;
 
-.admin-form-section h2 {
-  text-align: center;
-  color: #444;
-  font-size: 32px;
-  margin-bottom: 25px;
-}
+    gap: 15px;
+  }
 
+  .add-snack-form input,
+  .add-snack-form select,
+  .add-snack-form textarea {
+    font-size: 15px;
 
-/* =========================================
-   ADD SNACK FORM
-========================================= */
+    padding: 14px;
+  }
 
-.add-snack-form {
-  width: 90%;
-  max-width: 850px;
-  margin: 0 auto;
-  padding: 35px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-
-  background: #ffffff;
-  border-radius: 20px;
-
-  border: 1px solid #f0e5e1;
-
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-}
-
-
-/* Inputs and textarea */
-
-.add-snack-form input,
-.add-snack-form textarea {
-  width: 100%;
-  padding: 15px 18px;
-
-  border: 1px solid #ddd;
-  border-radius: 10px;
-
-  background: #fafafa;
-
-  color: #333;
-  font-size: 16px;
-
-  outline: none;
-
-  transition: all 0.3s ease;
-}
-
-
-/* Description */
-
-.add-snack-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-
-/* Focus */
-
-.add-snack-form input:focus,
-.add-snack-form textarea:focus {
-  border-color: #ff6b6b;
-  background: #ffffff;
-
-  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
-}
-
-
-/* Placeholder */
-
-.add-snack-form input::placeholder,
-.add-snack-form textarea::placeholder {
-  color: #999;
-}
-
-
-/* =========================================
-   ADD / UPDATE BUTTON
-========================================= */
-
-.add-snack-form button[type="submit"] {
-  width: 100%;
-  padding: 15px;
-
-  margin-top: 5px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #ff6b6b, #ff8e72);
-
-  color: white;
-
-  font-size: 17px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: all 0.3s ease;
-
-  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.25);
-}
-
-.add-snack-form button[type="submit"]:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 10px 22px rgba(255, 107, 107, 0.35);
-}
-
-
-/* =========================================
-   CANCEL BUTTON
-========================================= */
-
-.add-snack-form button[type="button"] {
-  width: 100%;
-  padding: 13px;
-
-  border: 1px solid #ddd;
-  border-radius: 10px;
-
-  background: #f5f5f5;
-  color: #555;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.3s ease;
-}
-
-.add-snack-form button[type="button"]:hover {
-  background: #eeeeee;
-  transform: translateY(-2px);
-}
+  .add-snack-form textarea {
+    min-height: 120px;
+  }
 
   .search-bar {
     flex-direction: column;

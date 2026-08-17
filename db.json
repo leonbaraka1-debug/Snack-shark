@@ -5,8 +5,7 @@
       "name": "Crispy Chips",
       "category": "Kenyan",
       "type": "Chips",
-      "price": 100,
-      "image": "/src/assets/Kenyan Style Masala Chips.jpg"
+      "price": 100
     },
 
     {
@@ -14,8 +13,7 @@
       "name": "Chocolate Bar",
       "category": "American",
       "type": "Chocolate",
-      "price": 150,
-      "image": "/src/assets/pinterest_ @universexox ♏.jpg"
+      "price": 150
     }
   ]
 }

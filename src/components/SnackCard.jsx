@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSnacks } from '../hooks/useSnacks';
+
 export default function SnackCard({ snack, isAdmin = false }) {
   const { updatePrice } = useSnacks();
   const [isEditing, setIsEditing] = useState(false);
@@ -13,14 +14,6 @@ export default function SnackCard({ snack, isAdmin = false }) {
 
   return (
     <div className="snack-card">
-      {snack.image && (
-        <img
-          src={snack.image}
-          alt={snack.name}
-          className="snack-image"
-        />
-      )}
-
       <h3>{snack.name}</h3>
       <p>{snack.description}</p>
       <p><strong>Origin:</strong> {snack.origin}</p>
@@ -43,9 +36,7 @@ export default function SnackCard({ snack, isAdmin = false }) {
               </button>
             </form>
           ) : (
-            <button onClick={() => setIsEditing(true)}>
-              Edit Price
-            </button>
+            <button onClick={() => setIsEditing(true)}>Edit Price</button>
           )}
         </div>
       )}

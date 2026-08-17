@@ -8,40 +8,31 @@ export function useSnacks() {
   const [error, setError] = useState(null);
 
   // GET - Fetch all snacks
-  useEffect(() => {
-    let cancelled = false;
+  const fetchSnacks = useCallback(async () => {
+    try {
+      setError(null);
 
-    async function loadSnacks() {
-      try {
-        const res = await fetch(API_URL);
+      const res = await fetch(API_URL);
 
-        if (!res.ok) {
-          throw new Error(`Failed to fetch snacks: ${res.status}`);
-        }
-
-        const data = await res.json();
-
-        if (!cancelled) {
-          setSnacks(data);
-          setLoading(false);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setError(err.message);
-          setLoading(false);
-        }
+      if (!res.ok) {
+        throw new Error(`Failed to fetch snacks: ${res.status}`);
       }
+
+      const data = await res.json();
+      setSnacks(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-
-    loadSnacks();
-
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
+  useEffect(() => {
+    fetchSnacks();
+  }, [fetchSnacks]);
+
   // POST - Add snack
-  const addProduct = useCallback(async (newProduct) => {
+  const addSnack = useCallback(async (newSnack) => {
     setError(null);
 
     try {
@@ -50,18 +41,18 @@ export function useSnacks() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newProduct),
+        body: JSON.stringify(newSnack),
       });
 
       if (!res.ok) {
         throw new Error(`Failed to add snack: ${res.status}`);
       }
 
-      const created = await res.json();
+      const createdSnack = await res.json();
 
-      setSnacks((prev) => [...prev, created]);
+      setSnacks((prev) => [...prev, createdSnack]);
 
-      return created;
+      return createdSnack;
     } catch (err) {
       setError(err.message);
       throw err;
@@ -69,7 +60,7 @@ export function useSnacks() {
   }, []);
 
   // PATCH - Update snack
-  const updateProduct = useCallback(async (id, updates) => {
+  const updateSnack = useCallback(async (id, updates) => {
     setError(null);
 
     try {
@@ -85,23 +76,32 @@ export function useSnacks() {
         throw new Error(`Failed to update snack: ${res.status}`);
       }
 
-      const updated = await res.json();
+      const updatedSnack = await res.json();
 
       setSnacks((prev) =>
         prev.map((snack) =>
-          String(snack.id) === String(id) ? updated : snack
+          String(snack.id) === String(id)
+            ? updatedSnack
+            : snack
         )
       );
 
-      return updated;
+      return updatedSnack;
     } catch (err) {
       setError(err.message);
       throw err;
     }
   }, []);
 
+  // PATCH - Update price
+  const updatePrice = useCallback(async (id, price) => {
+    return updateSnack(id, {
+      price: Number(price),
+    });
+  }, [updateSnack]);
+
   // DELETE - Delete snack
-  const deleteProduct = useCallback(async (id) => {
+  const deleteSnack = useCallback(async (id) => {
     setError(null);
 
     try {
@@ -114,7 +114,9 @@ export function useSnacks() {
       }
 
       setSnacks((prev) =>
-        prev.filter((snack) => String(snack.id) !== String(id))
+        prev.filter(
+          (snack) => String(snack.id) !== String(id)
+        )
       );
     } catch (err) {
       setError(err.message);
@@ -122,36 +124,29 @@ export function useSnacks() {
     }
   }, []);
 
-  // Refetch snacks manually if needed
+  // Refetch snacks
   const refetch = useCallback(async () => {
-    try {
-      setError(null);
-      setLoading(true);
-
-      const res = await fetch(API_URL);
-
-      if (!res.ok) {
-        throw new Error(`Failed to fetch snacks: ${res.status}`);
-      }
-
-      const data = await res.json();
-      setSnacks(data);
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    setLoading(true);
+    await fetchSnacks();
+  }, [fetchSnacks]);
 
   return {
     snacks,
-    products: snacks, // Alias for backward compatibility
+    products: snacks,
+
     loading,
     error,
-    addProduct,
-    updateProduct,
-    deleteProduct,
+
+    addSnack,
+    updateSnack,
+    updatePrice,
+    deleteSnack,
+
+    // Keep these aliases so existing code doesn't break
+    addProduct: addSnack,
+    updateProduct: updateSnack,
+    deleteProduct: deleteSnack,
+
     refetch,
   };
 }
