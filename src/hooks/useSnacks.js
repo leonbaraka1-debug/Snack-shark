@@ -1,42 +1,66 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-const API_URL = 'http://localhost:3001/snacks';
+const API_URL = "http://localhost:3001/snacks";
 
 export function useSnacks() {
-  const [products, setProducts] = useState([]);
+  const [snacks, setSnacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchProducts = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
-      const data = await res.json();
-      setProducts(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+  // GET - Fetch all snacks
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadSnacks() {
+      try {
+        const res = await fetch(API_URL);
+
+        if (!res.ok) {
+          throw new Error(`Failed to fetch snacks: ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        if (!cancelled) {
+          setSnacks(data);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message);
+          setLoading(false);
+        }
+      }
     }
+
+    loadSnacks();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
+  // POST - Add snack
   const addProduct = useCallback(async (newProduct) => {
     setError(null);
+
     try {
       const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(newProduct),
       });
-      if (!res.ok) throw new Error(`Failed to add product: ${res.status}`);
+
+      if (!res.ok) {
+        throw new Error(`Failed to add snack: ${res.status}`);
+      }
+
       const created = await res.json();
-      setProducts((prev) => [...prev, created]);
+
+      setSnacks((prev) => [...prev, created]);
+
       return created;
     } catch (err) {
       setError(err.message);
@@ -44,19 +68,31 @@ export function useSnacks() {
     }
   }, []);
 
+  // PATCH - Update snack
   const updateProduct = useCallback(async (id, updates) => {
     setError(null);
+
     try {
       const res = await fetch(`${API_URL}/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(updates),
       });
-      if (!res.ok) throw new Error(`Failed to update product: ${res.status}`);
+
+      if (!res.ok) {
+        throw new Error(`Failed to update snack: ${res.status}`);
+      }
+
       const updated = await res.json();
-      setProducts((prev) =>
-        prev.map((p) => (String(p.id) === String(id) ? updated : p))
+
+      setSnacks((prev) =>
+        prev.map((snack) =>
+          String(snack.id) === String(id) ? updated : snack
+        )
       );
+
       return updated;
     } catch (err) {
       setError(err.message);
@@ -64,19 +100,60 @@ export function useSnacks() {
     }
   }, []);
 
+  // DELETE - Delete snack
   const deleteProduct = useCallback(async (id) => {
     setError(null);
+
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error(`Failed to delete product: ${res.status}`);
-      setProducts((prev) => prev.filter((p) => String(p.id) !== String(id)));
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to delete snack: ${res.status}`);
+      }
+
+      setSnacks((prev) =>
+        prev.filter((snack) => String(snack.id) !== String(id))
+      );
     } catch (err) {
       setError(err.message);
       throw err;
     }
   }, []);
 
-  return { products, loading, error, addProduct, updateProduct, deleteProduct, refetch: fetchProducts };
+  // Refetch snacks manually if needed
+  const refetch = useCallback(async () => {
+    try {
+      setError(null);
+      setLoading(true);
+
+      const res = await fetch(API_URL);
+
+      if (!res.ok) {
+        throw new Error(`Failed to fetch snacks: ${res.status}`);
+      }
+
+      const data = await res.json();
+      setSnacks(data);
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return {
+    snacks,
+    products: snacks, // Alias for backward compatibility
+    loading,
+    error,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    refetch,
+  };
 }
 
 export default useSnacks;

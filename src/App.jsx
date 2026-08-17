@@ -15,12 +15,15 @@ function Home() {
 function App() {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/shop">Shop</Link>
-        <Link to="/admin">Admin</Link>
-      </nav>
+      <nav className="navbar">
+  <div className="logo">Snack Shop</div>
 
+  <div className="nav-links">
+    <Link to="/">Home</Link>
+    <Link to="/shop">Shop</Link>
+    <Link to="/admin">Admin</Link>
+  </div>
+</nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />

@@ -102,7 +102,7 @@ function Admin() {
       <section className="admin-form-section">
         <h2>{editingId ? "Edit Snack" : "Add Snack"}</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form className="add-snack-form" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
