@@ -1,6 +1,6 @@
-🍿 Snack Shark
+# 🍿 Snack Shark
 
-📌 Project Overview
+## 📌 Project Overview
 
 Snack Shark is a modern single-page snack shop application built with React and Vite. The application allows users to browse available snacks, search and filter products, while providing an administrative interface for managing the snack inventory.
 
@@ -8,7 +8,7 @@ The project demonstrates the use of React components, state management, custom h
 
 ---
 
-🎯 Project Objectives
+## 🎯 Project Objectives
 
 The main objectives of this project are to:
 
@@ -23,15 +23,15 @@ The main objectives of this project are to:
 
 ---
 
-✨ Features
+## ✨ Features
 
-🏠 Home Page
+### 🏠 Home Page
 
 - Provides an introduction to Snack Shark.
 - Includes a clear call-to-action for visiting the shop.
 - Responsive and visually appealing layout.
 
-🛍️ Shop Page
+### 🛍️ Shop Page
 
 Users can:
 
@@ -45,7 +45,7 @@ Users can:
   - Price
   - Stock
 
-🔐 Admin Dashboard
+### 🔐 Admin Dashboard
 
 The administrator can:
 
@@ -55,7 +55,7 @@ The administrator can:
 - View the current snack inventory.
 - Update snack information.
 
-📝 Snack Management Form
+### 📝 Snack Management Form
 
 The form allows administrators to enter:
 
@@ -68,11 +68,11 @@ The form allows administrators to enter:
 
 The form also supports editing existing snacks and cancelling an edit.
 
-🔎 Search and Filtering
+### 🔎 Search and Filtering
 
 The shop includes search functionality that allows users to quickly find snacks and filter them according to their category.
 
-📱 Responsive Design
+### 📱 Responsive Design
 
 The application is designed to work across different screen sizes, including:
 
@@ -82,7 +82,7 @@ The application is designed to work across different screen sizes, including:
 
 ---
 
-🛠️ Technologies Used
+## 🛠️ Technologies Used
 
 Technology| Purpose
 React| Building the user interface
@@ -96,7 +96,7 @@ GitHub Pages| Deployment
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 
 Snack-shark/
 │
@@ -127,7 +127,7 @@ Snack-shark/
 
 ---
 
-🔄 CRUD Operations
+## 🔄 CRUD Operations
 
 Snack Shark implements the four main CRUD operations:
 
@@ -151,7 +151,7 @@ These operations are handled through the custom "useSnacks" hook.
 
 ---
 
-🧩 Custom Hook
+## 🧩 Custom Hook
 
 The project uses a custom React hook called:
 
@@ -170,7 +170,7 @@ This keeps the components cleaner and makes the application easier to maintain.
 
 ---
 
-🚀 Getting Started
+## 🚀 Getting Started
 
 1. Clone the repository
 
@@ -204,7 +204,7 @@ Vite will provide a local development URL in the terminal.
 
 ---
 
-🧪 Testing
+## 🧪 Testing
 
 The project includes Vitest for testing.
 
@@ -214,7 +214,7 @@ npm test
 
 ---
 
-🏗️ Production Build
+## 🏗️ Production Build
 
 To create a production build:
 
@@ -228,7 +228,7 @@ directory.
 
 ---
 
-🌐 Deployment
+## 🌐 Deployment
 
 Snack Shark is configured for deployment using GitHub Pages.
 
@@ -240,7 +240,7 @@ The deployment creates a "gh-pages" branch containing the production build.
 
 ---
 
-🔗 Live Demo
+## 🔗 Live Demo
 
 GitHub Repository:
 
@@ -254,7 +254,7 @@ https://leonbaraka1-debug.github.io/Snack-shark/
 
 ---
 
-🎨 User Interface
+## 🎨 User Interface
 
 The application uses a modern snack-shop design featuring:
 
@@ -272,7 +272,7 @@ The interface was designed to provide a simple and enjoyable experience for both
 
 ---
 
-📚 Learning Outcomes
+## 📚 Learning Outcomes
 
 Through this project, the following concepts were practiced:
 
@@ -297,7 +297,7 @@ Through this project, the following concepts were practiced:
 
 ---
 
-👨‍💻 Authors
+## 👨‍💻 Authors
 
 Leon Baraka, Waynemark Ouma, Wanjiru Muthike, Michael Michie and Irvin Gitau
 
@@ -305,6 +305,6 @@ Snack Shark was developed as a React Single Page Application project demonstrati
 
 ---
 
-📄 License
+## 📄 License
 
 This project was created for educational purposes.
